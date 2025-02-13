@@ -1,0 +1,90 @@
+.page {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.background {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+.content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  text-align: center;
+  line-height: 2;
+  padding: 20px;
+  box-sizing: border-box;
+  font-size: 18px;
+}
+
+.button {
+  margin-top: 40px;
+  cursor: pointer;
+  background-color: transparent;
+  border: 2px solid #fff;
+  color: inherit;
+  padding: 20px;
+  width: 300px;
+  text-decoration: none;
+  font-size: inherit;
+  font-family: inherit;
+}
+
+.hen1 {
+  position: absolute;
+  bottom: 1%;
+  left: 100px;
+  width: 70px;
+}
+
+.hen2 {
+  position: absolute;
+  bottom: 1%;
+  left: 200px;
+  width: 85px;
+}
+
+.funny {
+  position: fixed;
+  bottom: 120px;
+  width: 200px;
+  left: 0;
+  transform: rotateY(180deg) translateX(100%);
+  transition: transform 5s linear;
+}
+
+.funny.clicked {
+  transform: rotateY(180deg) translateX(-100vw);
+}
+
+.audio {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 20px;
+  height: 20px;
+  background-color: #000000;
+}
+
+.sound {
+  width: 60px;
+  margin-top: 30px;
+  cursor: pointer;
+}
+
+@media (max-width: 1023px) {
+  .content {
+    font-size: 14px;
+  }
+}
