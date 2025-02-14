@@ -12,6 +12,7 @@ import {
 } from "react";
 import cn from "classnames";
 import clamp from "@/utils/clamp";
+import { useRouter } from "next/navigation";
 
 const firstMessages = [
   "Это поле боя!",
@@ -35,6 +36,7 @@ const secondMessages = [
 ];
 
 const Field: FC = () => {
+  const router = useRouter();
   const [firstStep, setFirstStep] = useState(0);
   const [secondStep, setSecondStep] = useState(0);
   const mishaRef = useRef<HTMLDivElement>(null);
@@ -45,6 +47,7 @@ const Field: FC = () => {
   const maxMishaShift = useRef(1250);
   const minTanyaShift = useRef(-1550);
   const maxTanyaShift = useRef(360);
+  const audioRef = useRef<HTMLAudioElement>(null);
 
   const mishaKeaboardEnable = useMemo(
     () => !firstMessages[firstStep],
@@ -109,15 +112,32 @@ const Field: FC = () => {
     [mishaKeaboardEnable, mishaShift, tanyaKeaboardEnable, tanyaShift]
   );
 
+  const handleClickSound = () => {
+    if (!audioRef.current?.paused) {
+      audioRef.current?.pause();
+    } else {
+      audioRef.current.play();
+    }
+  };
+
   useEffect(() => {
     window.addEventListener("keydown", handleMove);
 
     return () => window.removeEventListener("keydown", handleMove);
-  }, [handleMove, mishaKeaboardEnable]);
+  }, [handleMove]);
+
+  useEffect(() => {
+    if (
+      tanyaShift === maxTanyaShift.current &&
+      mishaShift === maxMishaShift.current
+    ) {
+      router.push("/rave");
+    }
+  }, [mishaShift, router, tanyaShift]);
 
   return (
     <div className={styles.page}>
-      <img className={styles.background} src={"/background.jpg"} alt="" />
+      <img className={styles.background} src={"/field/background.jpg"} alt="" />
       <div className={styles.mishaWrapper} ref={mishaRef}>
         <img className={styles.misha} src={"/misha.png"} alt="" />
         <img
@@ -162,7 +182,13 @@ const Field: FC = () => {
           />
         </Notify>
       )}
-      <audio autoPlay loop src="/dust.mp3" />
+      <audio ref={audioRef} autoPlay loop src="/field/dust.mp3" />
+      <img
+        className={styles.volume}
+        src="/sound.png"
+        alt=""
+        onClick={handleClickSound}
+      />
     </div>
   );
 };

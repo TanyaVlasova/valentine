@@ -58,7 +58,7 @@
 .funny {
   position: fixed;
   bottom: 120px;
-  width: 200px;
+  width: 250px;
   left: 0;
   transform: rotateY(180deg) translateX(100%);
   transition: transform 5s linear;
@@ -80,6 +80,14 @@
 .sound {
   width: 60px;
   margin-top: 30px;
+  cursor: pointer;
+}
+
+.volume {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
   cursor: pointer;
 }
 

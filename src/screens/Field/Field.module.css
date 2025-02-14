@@ -75,6 +75,15 @@
   cursor: pointer;
 }
 
+.volume {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  width: 50px;
+  filter: invert(1);
+  cursor: pointer;
+}
+
 @keyframes float {
   0% {
     transform: translateY(0);
